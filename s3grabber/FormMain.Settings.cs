@@ -23,6 +23,7 @@ namespace s3grabber
                     regions.Add("EU (Ireland)", "s3-eu-west-1.amazonaws.com");
                     regions.Add("Asia Pacific (Singapore)", "s3-ap-southeast-1.amazonaws.com");
                     regions.Add("Asia Pacific (Tokyo)", "s3-ap-northeast-1.amazonaws.com");
+                    regions.Add("Asia Pacific (Sydney)", "s3-ap-southeast-2.amazonaws.com");
                     regions.Add("South America (Sao Paulo)", "s3-sa-east-1.amazonaws.com");
                 }
                 return regions;
