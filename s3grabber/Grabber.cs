@@ -16,9 +16,9 @@ namespace s3grabber
 
         private static Bitmap CaptureScreen()
         {
-            Point size = GetScreenSize();
+            Rectangle size = GetScreenSize();
 
-            Bitmap bmp = new Bitmap(size.X, size.Y, PixelFormat.Format32bppArgb);
+            Bitmap bmp = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -26,8 +26,8 @@ namespace s3grabber
                 {
                     g.CopyFromScreen(s.Bounds.X,
                                      s.Bounds.Y,
-                                     s.Bounds.X,
-                                     s.Bounds.Y,
+                                     s.Bounds.X - size.X, //Adjust so the top-left is at (0, 0)
+                                     s.Bounds.Y - size.Y,
                                      s.Bounds.Size,
                                      CopyPixelOperation.SourceCopy);
                 }
@@ -36,18 +36,27 @@ namespace s3grabber
             return bmp;
         }
 
-        public static Point GetScreenSize()
+        public static Rectangle GetScreenSize()
         {
             int maxwidth = 0;
             int maxheight = 0;
+            int minX = 0, minY = 0;
 
             foreach (Screen s in Screen.AllScreens)
             {
-                maxwidth = Math.Max(maxwidth, s.Bounds.X + s.Bounds.Width);
-                maxheight = Math.Max(maxheight, s.Bounds.Y + s.Bounds.Height);
+                minX = Math.Min(minX, s.Bounds.X);
+                minY = Math.Min(minY, s.Bounds.Y);
+            }
+
+
+            foreach (Screen s in Screen.AllScreens)
+            {
+                maxwidth = Math.Max(maxwidth, s.Bounds.X + s.Bounds.Width - minX);
+                maxheight = Math.Max(maxheight, s.Bounds.Y + s.Bounds.Height - minY);
 
             }
-            return new Point(maxwidth, maxheight);
+            //This rectangle goes from the top left to the bottom right, including every screen
+            return new Rectangle(minX, minY, maxwidth, maxheight);
         }
 
         private static ImageCodecInfo GetEncoder()

@@ -43,8 +43,10 @@ namespace s3grabber
                 dragging = false;
 
                 InitializeComponent();
-                this.Size = new Size(Grabber.GetScreenSize());
+                Rectangle screen = Grabber.GetScreenSize();
+                this.Size = new Size(screen.Width, screen.Height);
                 Show();
+                this.Location = new Point(screen.X, screen.Y);
             }
         }
 
