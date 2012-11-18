@@ -52,7 +52,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormCutting";
             this.Text = "FormCutting";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.FormCutting_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCutting_FormClosing);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormCutting_KeyPress);

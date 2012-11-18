@@ -43,7 +43,7 @@ namespace s3grabber
                 dragging = false;
 
                 InitializeComponent();
-
+                this.Size = new Size(Grabber.GetScreenSize());
                 Show();
             }
         }
