@@ -142,5 +142,17 @@ namespace s3grabber.Properties {
                 this["DingOnUpload"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StorageFolder {
+            get {
+                return ((string)(this["StorageFolder"]));
+            }
+            set {
+                this["StorageFolder"] = value;
+            }
+        }
     }
 }

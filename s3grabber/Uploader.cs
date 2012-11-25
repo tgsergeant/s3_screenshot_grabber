@@ -45,11 +45,19 @@ namespace s3grabber
             req.KeepAlive = false;
         }
 
+        public static String GetObjectName()
+        {
+            return Program.Config.ObjectPrefix + DateTime.Now.Ticks / TimeSpan.TicksPerSecond + "." + Program.Config.ImageType.ToLower();
+        }
+
         public static void Upload(Stream stream)
         {
-            S3Service service = GetService();
+            Upload(stream, GetObjectName());
+        }
 
-            string objectName = Program.Config.ObjectPrefix + DateTime.Now.Ticks / TimeSpan.TicksPerSecond + "." + Program.Config.ImageType.ToLower();
+        public static void Upload(Stream stream, String objectName)
+        {
+            S3Service service = GetService();
 
             long len = stream.Position;
             stream.Seek(0, SeekOrigin.Begin);
@@ -112,7 +120,6 @@ namespace s3grabber
                     }
                 }
             }, null);
-
         }
 
         public static TestConnectivityResult testConnectivity()

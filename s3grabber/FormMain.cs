@@ -177,6 +177,17 @@ namespace s3grabber
                 e.Effect = DragDropEffects.Copy;
             }
         }
+
+        private void folderSelectButton_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "Select a folder to save your images to locally";
+            dialog.ShowNewFolderButton = true;
+            dialog.ShowDialog();
+
+            folderSelectTextBox.Text = dialog.SelectedPath;
+            
+        }
     }
         #endregion
 }

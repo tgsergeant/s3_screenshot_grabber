@@ -49,6 +49,9 @@ namespace s3grabber
             this.label10 = new System.Windows.Forms.Label();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.folderSelectButton = new System.Windows.Forms.Button();
+            this.folderSelectTextBox = new System.Windows.Forms.TextBox();
+            this.folderSelectLabel = new System.Windows.Forms.Label();
             this.checkBoxDing = new System.Windows.Forms.CheckBox();
             this.checkBoxClipboard = new System.Windows.Forms.CheckBox();
             this.trackBarQuality = new System.Windows.Forms.TrackBar();
@@ -114,7 +117,7 @@ namespace s3grabber
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(391, 366);
+            this.tabControl.Size = new System.Drawing.Size(391, 392);
             this.tabControl.TabIndex = 1;
             // 
             // tabPage1
@@ -124,7 +127,7 @@ namespace s3grabber
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(383, 340);
+            this.tabPage1.Size = new System.Drawing.Size(383, 366);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -137,7 +140,7 @@ namespace s3grabber
             this.listImages.Location = new System.Drawing.Point(3, 162);
             this.listImages.Name = "listImages";
             this.listImages.ScrollAlwaysVisible = true;
-            this.listImages.Size = new System.Drawing.Size(377, 175);
+            this.listImages.Size = new System.Drawing.Size(377, 201);
             this.listImages.TabIndex = 6;
             this.listImages.DoubleClick += new System.EventHandler(this.listImages_DoubleClick);
             // 
@@ -224,13 +227,16 @@ namespace s3grabber
             this.tabConfig.Location = new System.Drawing.Point(4, 22);
             this.tabConfig.Name = "tabConfig";
             this.tabConfig.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConfig.Size = new System.Drawing.Size(383, 340);
+            this.tabConfig.Size = new System.Drawing.Size(383, 366);
             this.tabConfig.TabIndex = 1;
             this.tabConfig.Text = "Configuration";
             this.tabConfig.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.folderSelectButton);
+            this.groupBox3.Controls.Add(this.folderSelectTextBox);
+            this.groupBox3.Controls.Add(this.folderSelectLabel);
             this.groupBox3.Controls.Add(this.checkBoxDing);
             this.groupBox3.Controls.Add(this.checkBoxClipboard);
             this.groupBox3.Controls.Add(this.trackBarQuality);
@@ -240,15 +246,42 @@ namespace s3grabber
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 211);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(377, 126);
+            this.groupBox3.Size = new System.Drawing.Size(377, 152);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Screenshot Settings";
             // 
+            // folderSelectButton
+            // 
+            this.folderSelectButton.Location = new System.Drawing.Point(237, 100);
+            this.folderSelectButton.Name = "folderSelectButton";
+            this.folderSelectButton.Size = new System.Drawing.Size(30, 20);
+            this.folderSelectButton.TabIndex = 9;
+            this.folderSelectButton.Text = "...";
+            this.folderSelectButton.UseVisualStyleBackColor = true;
+            this.folderSelectButton.Click += new System.EventHandler(this.folderSelectButton_Click);
+            // 
+            // folderSelectTextBox
+            // 
+            this.folderSelectTextBox.Location = new System.Drawing.Point(88, 100);
+            this.folderSelectTextBox.Name = "folderSelectTextBox";
+            this.folderSelectTextBox.Size = new System.Drawing.Size(143, 20);
+            this.folderSelectTextBox.TabIndex = 8;
+            this.folderSelectTextBox.TextChanged += new System.EventHandler(this.folderSelectTextBox_TextChanged);
+            // 
+            // folderSelectLabel
+            // 
+            this.folderSelectLabel.AutoSize = true;
+            this.folderSelectLabel.Location = new System.Drawing.Point(8, 103);
+            this.folderSelectLabel.Name = "folderSelectLabel";
+            this.folderSelectLabel.Size = new System.Drawing.Size(68, 13);
+            this.folderSelectLabel.TabIndex = 7;
+            this.folderSelectLabel.Text = "Local Folder:";
+            // 
             // checkBoxDing
             // 
             this.checkBoxDing.AutoSize = true;
-            this.checkBoxDing.Location = new System.Drawing.Point(156, 101);
+            this.checkBoxDing.Location = new System.Drawing.Point(157, 130);
             this.checkBoxDing.Name = "checkBoxDing";
             this.checkBoxDing.Size = new System.Drawing.Size(188, 17);
             this.checkBoxDing.TabIndex = 6;
@@ -259,7 +292,7 @@ namespace s3grabber
             // checkBoxClipboard
             // 
             this.checkBoxClipboard.AutoSize = true;
-            this.checkBoxClipboard.Location = new System.Drawing.Point(10, 101);
+            this.checkBoxClipboard.Location = new System.Drawing.Point(11, 130);
             this.checkBoxClipboard.Name = "checkBoxClipboard";
             this.checkBoxClipboard.Size = new System.Drawing.Size(140, 17);
             this.checkBoxClipboard.TabIndex = 5;
@@ -494,7 +527,7 @@ namespace s3grabber
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 366);
+            this.ClientSize = new System.Drawing.Size(391, 392);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
@@ -560,6 +593,9 @@ namespace s3grabber
         private ListBox listImages;
         private Panel panel1;
         private Label label13;
+        private TextBox folderSelectTextBox;
+        private Label folderSelectLabel;
+        private Button folderSelectButton;
     }
 }
 

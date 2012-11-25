@@ -97,6 +97,11 @@ namespace s3grabber
             Program.Config.DingOnUpload = checkBoxDing.Checked;
         }
 
+        private void folderSelectTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Program.Config.StorageFolder = folderSelectTextBox.Text;
+        }
+
         private void LoadConfig()
         {
             textBoxAccessKey.Text = Program.Config.AccessKey;
@@ -121,6 +126,8 @@ namespace s3grabber
 
             checkBoxDing.Checked = Program.Config.DingOnUpload;
             checkBoxClipboard.Checked = Program.Config.CopyToClipboard;
+
+            folderSelectTextBox.Text = Program.Config.StorageFolder;
         }
 
     }

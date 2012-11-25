@@ -111,17 +111,47 @@ namespace s3grabber
                     throw new Exception("Unable to capture a bitmap.");
                 }
 
-                MemoryStream ms = EncodeBitmap(bmp);
+                if (!Program.Config.StorageFolder.Equals(""))
+                {
+                    string localFile = Program.Config.StorageFolder;
+                }
+                
+                String objectName = Uploader.GetObjectName();
+                //Save image to file, if folder is specified in config
+                if (Program.Config.StorageFolder != null && !Program.Config.StorageFolder.Equals(""))
+                {
+                    String localFile = Program.Config.StorageFolder + "\\" + objectName;
+                    EncoderParameters eps = new EncoderParameters();
+                    eps.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)Int64.Parse(Program.Config.ImageQuality));
+                    ImageCodecInfo ici = GetEncoderInfo("image/" + Program.Config.ImageType);
 
+                    bmp.Save(localFile, ici, eps); 
+                }
+                
+                MemoryStream ms = EncodeBitmap(bmp);
+                
                 if (ms != null)
                 {
-                    Uploader.Upload(ms);
+                    Uploader.Upload(ms, objectName);
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+        public static ImageCodecInfo GetEncoderInfo(string mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType.Equals(mimeType.ToLower()))
+                    return encoders[j];
+            }
+            return null;
         }
 
         public static void CaptureAndCrop()
