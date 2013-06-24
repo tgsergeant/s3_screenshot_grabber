@@ -47,7 +47,12 @@ namespace s3grabber
 
         public static String GetObjectName()
         {
-            return Program.Config.ObjectPrefix + DateTime.Now.Ticks / TimeSpan.TicksPerSecond + "." + Program.Config.ImageType.ToLower();
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new Random();
+            var id = new string(
+                Enumerable.Repeat(chars, 5).Select(s => s[random.Next(s.Length)]).ToArray());
+
+            return Program.Config.ObjectPrefix + id  + "." + Program.Config.ImageType.ToLower();
         }
 
         public static void Upload(Stream stream)
